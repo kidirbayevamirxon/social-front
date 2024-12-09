@@ -1,13 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/profile.css" />
     <title>Profile</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        
+      <div class="profile">
+        <div class="profile-div">
+          <div class="profile-top">
+            <div class="profile-top-left">
+              <a href="./logo.html"
+                ><img
+                  class="profile-left-img"
+                  src="./public/arrow-left-solid.svg"
+                  alt=""
+              /></a>
+            </div>
+          </div>
+          <div class="profile-center">
+            <div class="profile-center1">
+              <div class="pcc">
+                <form action="" method="post" class="form" enctype="multipart/form-data">
+                    <span class="profile-span">Will you change your avatar?</span>
+                    <input class="value1" id="fileInput" type="file" accept="image/*" required>
+                    <img id="displayimg" alt="Preview" style="max-width: 200px; max-height: 200px; display: none; margin-top: 10px;">
+                    <input class="profile-btn" type="submit" value="Edit">
+                </form>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</body>
+    <script type="module" src="./js/profile.js"></script>
+  </body>
 </html>
