@@ -16,10 +16,11 @@
 }
 .logo-left{
     width: 400px;
-    height: 100vh;
+    height: auto;
     background-color: rgb(34, 34, 34);
     padding-top: 100px;
     padding-left: 100px;
+    padding-bottom: 150px;
 }
 .logo-right-top{
     width: 1519px;
@@ -79,8 +80,48 @@
     transition-duration: 1s;
 }
 
+.logo-right-button{
+    padding-top: 50px;
+    padding-left: 50px;
+}
+.btndiv{
+    width: 500px;
+    height: 130px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    flex-direction: column;
+    display: flex;
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
+.btndivtop{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.btn1{
+    width: 100px;
+    height: 30px;
+    background-color: #000;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
 
-
+}
+.btn1:hover{
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+}
+.btndivbtn{
+    display: flex;
+    gap: 30px;
+    margin-top: 30px;
+    margin-left: 250px;
+}
 
 
 

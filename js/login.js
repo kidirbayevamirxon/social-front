@@ -1,8 +1,10 @@
 import axios from "axios";
-
+// import { input11 } from './login.js';
 const form = document.querySelector(".form");
 const input1 = document.querySelector(".value1");
 const input2 = document.querySelector(".value2");
+export const input11 = document.querySelector(".value1");
+
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
