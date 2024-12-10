@@ -1,13 +1,12 @@
 import axios from "axios";
-// import { input11 } from './login.js';
+
 const form = document.querySelector(".form");
 const input1 = document.querySelector(".value1");
 const input2 = document.querySelector(".value2");
-export const input11 = document.querySelector(".value1");
-
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+
   axios
     .post("http://localhost:3000/users", {
       name: input1.value,
@@ -15,6 +14,10 @@ form.addEventListener("submit", (e) => {
     })
     .then((response) => {
       console.log("POST javobi:", response.data);
+
+      localStorage.setItem("username", input1.value);
+
+      location.href = "./logo.html";
     })
     .catch((error) => {
       console.error("POST xatosi:", error);
@@ -23,7 +26,7 @@ form.addEventListener("submit", (e) => {
   axios
     .get("http://localhost:3000/users")
     .then((res) => {
-        location.href='./logo.html'
+      location.href = "./logo.html";
       console.log("GET javobi:", res.data);
     })
     .catch((err) => {
