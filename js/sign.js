@@ -18,6 +18,10 @@ form.addEventListener("submit", (e) => {
 })
 
     .then((response) => {
+      localStorage.setItem('first',input1.value)
+      localStorage.setItem('last',input2.value)
+      localStorage.setItem('username',input3.value)
+      localStorage.setItem('email',input5.value)
       console.log("POST javobi:", response.data);
     })
     .catch((error) => {
