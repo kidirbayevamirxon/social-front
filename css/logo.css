@@ -111,10 +111,54 @@
 }
 .p1{
     color: #fff;
+    font-size: 22px;
 }
 .p2{
     color: #fff;
     background-color: transparent;
     border: none;
+    font-size: 19px;
+}
+.commit{
+    width: 1200px;
+    height: 50px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+.commitp{
+    color: #fff;
+    font-size: 22px;
+}
+.span1{
+    font-size: 50px;
+    color: #fff; 
+    width: 100px;
+    height: 50px;
+    border: 2px solid black;
+    border-radius: 50%; 
+    display: flex;
+    align-items: center;
+ 
+    background-color: transparent;
+    border: none;
+}
 
+.span2{
+    font-size: 50px; 
+    color: #fff;
+    width: 100px;
+    height: 50px;
+    border: 2px solid black; 
+    border-radius: 50%; 
+    display: flex;
+    align-items: center;
+   
+    background-color: transparent;
+    border: none;
+    
+}
+.likecommit{
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
 }
