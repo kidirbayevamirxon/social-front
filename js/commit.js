@@ -31,9 +31,25 @@ const committext=document.createElement('div')
 commitccc.appendChild(committext)
 const committexttop=document.createElement('div')
 committext.appendChild(committexttop)
+const committexttopleft=document.createElement('div')
+committexttop.appendChild(committexttopleft)
+const topleftimg=document.createElement('div')
+committexttopleft.appendChild(topleftimg)
+const topleftuser=document.createElement('p')
+committexttopleft.appendChild(topleftuser)
+const ahlat=document.createElement('button')
+committexttop.appendChild(ahlat)
+const commentarya=document.createElement('p')
+committext.appendChild(commentarya)
+const commentBtn=document.createElement('p')
+committext.appendChild(commentBtn)
+
+
+commentarya.textContent=input.value
 
 
 
+ahlat.type="submit"
 input.placeholder="comment"
 submit.textContent='Submit'
 submit.type="submit"
@@ -52,11 +68,24 @@ input.className="input"
 submit.className="submit"
 committext.className="committext"
 committexttop.className="committexttop"
+committexttopleft.className="committexttopleft"
+topleftimg.className="topleftimgg"
+topleftuser.className="topleftuser"
+ahlat.className="ahlat"
+commentarya.className="commentarya"
+commentBtn.className="commentBtn"
+
 // Foydalanuvchi ismini olish va p1 elementiga qo'shish
 const username = localStorage.getItem("username");
 
 if (username) {
   p1.textContent = `${username}`; // Foydalanuvchi ismini `p1`ga joylash
+} else {
+  console.error("Foydalanuvchi aniqlanmadi.");
+}
+
+if (username) {
+  topleftuser.textContent = `${username}`; // Foydalanuvchi ismini `p1`ga joylash
 } else {
   console.error("Foydalanuvchi aniqlanmadi.");
 }
@@ -81,3 +110,21 @@ span1.addEventListener("click", () => {
     location.href = "./commit.html"; 
     
   });
+
+  ahlat.addEventListener('click',(a)=>{
+    a.preventDefault()
+    committext.style.display="none"
+  })
+  submit.addEventListener("click", () => {
+    
+    const commentText = input.value
+    if (commentText) {
+      commentarya.textContent = commentText;
+      input.value = ""; 
+      committext.style.display="block"
+    } else {
+      alert("Iltimos, sharh matnini kiriting."); 
+    }
+  });
+  
+

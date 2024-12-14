@@ -94,7 +94,6 @@
 .topdiv {
   width: 230px;
   height: 80px;
-  border: 1px solid #fff;
   display: flex;
   justify-content: space-around;
   align-items: center;

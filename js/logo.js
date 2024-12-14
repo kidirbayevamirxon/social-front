@@ -82,6 +82,6 @@ form.addEventListener("submit", (e) => {
   let com = 0;
   span2.addEventListener("click", () => { 
     location.href = "./commit.html"; 
-    
+
   });
 });

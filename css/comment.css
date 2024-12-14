@@ -47,7 +47,7 @@
 }
 .commitccc{
     width: 85%;
-    height: 70vh;
+    height: auto;
     margin: 0 auto;
 
     border-radius: 14px;
@@ -145,5 +145,40 @@
     border-radius: 10px;
     padding-left: 20px;
     padding-right: 20px;
+    padding-top: 10px;
 }
-
+.committexttop{
+    width: 1010px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+.committexttopleft{
+    width: 130px;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+}
+.topleftimgg{
+    background-size: 38px 38px;
+    background-image: url('../public/user-solid\ \(4\).svg');
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgb(68, 68, 68);
+    border-radius: 40px;
+}
+.topleftuser{
+    color: #fff;
+}
+.ahlat{
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: transparent;
+    background-image: url('../public/trash-solid.svg');
+    background-size: 30px 30px;
+}
+.commentarya{
+    color: #fff;
+    margin-top: 10px;
+}
