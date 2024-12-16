@@ -4,6 +4,7 @@ const commitccc = document.querySelector(".commitccc");
 const compro = document.createElement("div");
 commitccc.appendChild(compro);
 
+let com = 1;
 const div = document.createElement("div");
 const p1 = document.createElement("p");
 compro.appendChild(div);
@@ -11,6 +12,7 @@ compro.appendChild(p1);
 
 const p2 = document.createElement("p");
 commitccc.appendChild(p2);
+p2.textContent = "aaaaaaa";
 const likecommit = document.createElement("div");
 commitccc.appendChild(likecommit);
 const span1 = document.createElement("button");
@@ -18,7 +20,7 @@ const span2 = document.createElement("button");
 likecommit.appendChild(span1);
 likecommit.appendChild(span2);
 span1.textContent = `❤ ${0}`;
-span2.textContent = `🗨 ${0}`;
+span2.textContent = `🗨 ${com}`;
 
 const inputdiv = document.createElement("div");
 commitccc.appendChild(inputdiv);
@@ -39,8 +41,11 @@ const topleftuser = document.createElement("p");
 committexttopleft.appendChild(topleftuser);
 const ahlat = document.createElement("button");
 committexttop.appendChild(ahlat);
+const comdiv=document.createElement("div")
 const commentarya = document.createElement("p");
-committext.appendChild(commentarya);
+committext.appendChild(comdiv);
+comdiv.appendChild(commentarya)
+commentarya.textContent="aaaaaa"
 const commentBtn = document.createElement("p");
 committext.appendChild(commentBtn);
 
@@ -71,7 +76,7 @@ topleftuser.className = "topleftuser";
 ahlat.className = "ahlat";
 commentarya.className = "commentarya";
 commentBtn.className = "commentBtn";
-
+comdiv.className="comdiv"
 const username = localStorage.getItem("username");
 
 if (username) {
@@ -86,7 +91,7 @@ if (username) {
   console.error("Foydalanuvchi aniqlanmadi.");
 }
 
-p2.textContent = "aaaaaaa";
+
 
 let liked = 0;
 span1.addEventListener("click", () => {
@@ -100,7 +105,7 @@ span1.addEventListener("click", () => {
   span1.textContent = `❤ ${liked}`;
 });
 
-let com = 0;
+
 span2.addEventListener("click", () => {
   location.href = "./commit.html";
 });
@@ -124,14 +129,19 @@ submit.addEventListener("click", () => {
     const newComment = document.createElement("div");
     newComment.className = "newComment";
     newComment.innerHTML = `
-      <div class="committext"><div class="committexttop">
+      <div class="committext">
+        <div class="committexttop">
           <div class="committexttopleft">
             <div class="topleftimgg"></div>
             <p class="topleftuser">${username || "Anonim"}</p>
           </div>
           <button class="ahlat"></button>
         </div>
-        <p class="commentarya">${commentText}</p></div>
+        <div class="comdiv">
+        <p class="commentarya">${commentText}</p>
+        </div>
+        
+      </div>
     `;
     commitccc.appendChild(newComment);
 
@@ -143,11 +153,22 @@ submit.addEventListener("click", () => {
   } else {
     alert("Iltimos, sharh matnini kiriting.");
   }
-  com+=1
-  span2.textContent=`🗨 ${com}`  
+
+  // `com` qiymatini oshirish
+  com += 1;
+  span2.textContent = `🗨 ${com}`;  
 });
 
-ahlat.addEventListener("click", (a) => {
-  a.preventDefault();
-  committext.style.display = "none";
+// Har bir sharhni o'chirish uchun
+commitccc.addEventListener("click", (e) => {
+  if (e.target && e.target.classList.contains("ahlat")) {
+    const commentDiv = e.target.closest(".committext");
+    if (commentDiv) {
+      commentDiv.style.display = "none";
+      
+    }
+    com-=1
+  }
 });
+
+
