@@ -82,6 +82,16 @@ form.addEventListener("submit", (e) => {
   let com = 0;
   span2.addEventListener("click", () => { 
     location.href = "./commit.html"; 
-
+   
+  
+    
   });
+  window.addEventListener("incrementCom", (event) => {
+    window.com += 1;
+    console.log(`Sharhlar soni (logo.js): ${window.com}`);
+  });
+  
+  span2.textContent=`🗨 ${com}`
 });
+
+

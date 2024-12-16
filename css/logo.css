@@ -12,14 +12,24 @@
   height: 100vh;
 }
 .logo-div {
+  width: 100%;
   display: flex;
+  justify-content: center;
 }
-.logo-left {
+.lll {
   width: 400px;
   height: auto;
   background-color: rgb(34, 34, 34);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo-left {
+  width: 200px;
+  height: auto;
+  background-color: rgb(34, 34, 34);
   padding-top: 100px;
-  padding-left: 100px;
+  /* padding-left: 100px; */
   padding-bottom: 340px;
 }
 .logo-right-top {
@@ -108,56 +118,55 @@
   background-position: center;
   border-radius: 100%;
 }
-.p1{
-    color: #fff;
-    font-size: 22px;
+.p1 {
+  color: #fff;
+  font-size: 22px;
 }
-.p2{
-    color: #fff;
-    background-color: transparent;
-    border: none;
-    font-size: 19px;
+.p2 {
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  font-size: 19px;
 }
-.commit{
-    width: 1200px;
-    height: 50px;
-    padding: 20px;
-    margin-bottom: 30px;
+.commit {
+  width: 1200px;
+  height: 50px;
+  padding: 20px;
+  margin-bottom: 30px;
 }
-.commitp{
-    color: #fff;
-    font-size: 22px;
+.commitp {
+  color: #fff;
+  font-size: 22px;
 }
-.span1{
-    font-size: 50px;
-    color: #fff; 
-    width: 100px;
-    height: 50px;
-    border: 2px solid black;
-    border-radius: 50%; 
-    display: flex;
-    align-items: center;
- 
-    background-color: transparent;
-    border: none;
+.span1 {
+  font-size: 50px;
+  color: #fff;
+  width: 100px;
+  height: 50px;
+  border: 2px solid black;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+
+  background-color: transparent;
+  border: none;
 }
 
-.span2{
-    font-size: 50px; 
-    color: #fff;
-    width: 100px;
-    height: 50px;
-    border: 2px solid black; 
-    border-radius: 50%; 
-    display: flex;
-    align-items: center;
-   
-    background-color: transparent;
-    border: none;
-    
+.span2 {
+  font-size: 50px;
+  color: #fff;
+  width: 100px;
+  height: 50px;
+  border: 2px solid black;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+
+  background-color: transparent;
+  border: none;
 }
-.likecommit{
-    width: 200px;
-    display: flex;
-    justify-content: space-between;
+.likecommit {
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
 }
