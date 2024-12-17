@@ -41,11 +41,11 @@ const topleftuser = document.createElement("p");
 committexttopleft.appendChild(topleftuser);
 const ahlat = document.createElement("button");
 committexttop.appendChild(ahlat);
-const comdiv=document.createElement("div")
+const comdiv = document.createElement("div");
 const commentarya = document.createElement("p");
 committext.appendChild(comdiv);
-comdiv.appendChild(commentarya)
-commentarya.textContent="aaaaaa"
+comdiv.appendChild(commentarya);
+commentarya.textContent = "aaaaaa";
 const commentBtn = document.createElement("p");
 committext.appendChild(commentBtn);
 
@@ -76,7 +76,7 @@ topleftuser.className = "topleftuser";
 ahlat.className = "ahlat";
 commentarya.className = "commentarya";
 commentBtn.className = "commentBtn";
-comdiv.className="comdiv"
+comdiv.className = "comdiv";
 const username = localStorage.getItem("username");
 
 if (username) {
@@ -91,8 +91,6 @@ if (username) {
   console.error("Foydalanuvchi aniqlanmadi.");
 }
 
-
-
 let liked = 0;
 span1.addEventListener("click", () => {
   if (span1.textContent === `❤ ${0}`) {
@@ -105,11 +103,9 @@ span1.addEventListener("click", () => {
   span1.textContent = `❤ ${liked}`;
 });
 
-
 span2.addEventListener("click", () => {
   location.href = "./commit.html";
 });
-
 
 // submit.addEventListener("click", () => {
 
@@ -126,6 +122,10 @@ span2.addEventListener("click", () => {
 submit.addEventListener("click", () => {
   const commentText = input.value.trim();
   if (commentText) {
+    let vaqt = new Date();
+    let vaqtt = `${vaqt.getDate()}/${vaqt.getMonth()}/${vaqt.getFullYear()}, ${vaqt.getHours()}:${vaqt.getMinutes()}:${vaqt.getSeconds()}`;
+
+
     const newComment = document.createElement("div");
     newComment.className = "newComment";
     newComment.innerHTML = `
@@ -139,14 +139,19 @@ submit.addEventListener("click", () => {
         </div>
         <div class="comdiv">
         <p class="commentarya">${commentText}</p>
+        <br>
+        <p class="commentBtn">${vaqtt}</p>
         </div>
         
       </div>
     `;
     commitccc.appendChild(newComment);
+    
 
     // Hodisa yuborish
-    const event = new CustomEvent("incrementCom", { detail: { comment: commentText } });
+    const event = new CustomEvent("incrementCom", {
+      detail: { comment: commentText },
+    });
     window.dispatchEvent(event);
 
     input.value = ""; // Inputni tozalash
@@ -156,7 +161,7 @@ submit.addEventListener("click", () => {
 
   // `com` qiymatini oshirish
   com += 1;
-  span2.textContent = `🗨 ${com}`;  
+  span2.textContent = `🗨 ${com}`;
 });
 
 // Har bir sharhni o'chirish uchun
@@ -165,10 +170,7 @@ commitccc.addEventListener("click", (e) => {
     const commentDiv = e.target.closest(".committext");
     if (commentDiv) {
       commentDiv.style.display = "none";
-      
     }
-    com-=1
+    com -= 1;
   }
 });
-
-
