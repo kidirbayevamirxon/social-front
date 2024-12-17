@@ -23,6 +23,7 @@ form.addEventListener("submit", (e) => {
       localStorage.setItem('username',input3.value)
       localStorage.setItem('email',input5.value)
       console.log("POST javobi:", response.data);
+      location.href='./logo.html'
     })
     .catch((error) => {
       console.error("POST xatosi:", error);
@@ -31,7 +32,7 @@ form.addEventListener("submit", (e) => {
   axios
     .get("https://social-backend-kzy5.onrender.com/auth/sign-up")
     .then((res) => {
-        location.href='./logo.html'
+        
       console.log("GET javobi:", res.data);
     })
     .catch((err) => {
