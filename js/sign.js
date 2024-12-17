@@ -9,7 +9,7 @@ const input5 = document.querySelector(".value5");
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  axios.post("http://localhost:3000/users", {
+  axios.post("https://social-backend-kzy5.onrender.com/auth/sign-up", {
   first: input1.value,
   last: input2.value,
   name: input3.value,
@@ -29,7 +29,7 @@ form.addEventListener("submit", (e) => {
     });
 
   axios
-    .get("http://localhost:3000/users")
+    .get("https://social-backend-kzy5.onrender.com/auth/sign-up")
     .then((res) => {
         location.href='./logo.html'
       console.log("GET javobi:", res.data);

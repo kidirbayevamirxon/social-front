@@ -8,7 +8,7 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
 
   axios
-    .post("http://localhost:3000/users", {
+    .post("https://social-backend-kzy5.onrender.com/auth/login", {
       name: input1.value,
       password: input2.value,
     })
@@ -24,7 +24,7 @@ form.addEventListener("submit", (e) => {
     });
 
   axios
-    .get("http://localhost:3000/users")
+    .get("https://social-backend-kzy5.onrender.com/auth/login")
     .then((res) => {
       location.href = "./logo.html";
       console.log("GET javobi:", res.data);
