@@ -72,3 +72,19 @@
     text-decoration: none;
     color: #fff;
 }
+.passwordE{
+    margin-top: -15px;
+    margin-bottom: -15px;
+}
+.passwordError{
+    color: rgba(255, 0, 0, 0.863);
+    line-height: 1px;
+    letter-spacing: 2px;
+    
+}
+.emailError{
+    color: rgba(255, 0, 0, 0.863);
+    line-height: 1px;
+    letter-spacing: 2px;
+    
+}

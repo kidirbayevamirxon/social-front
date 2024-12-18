@@ -7,28 +7,20 @@ const input3 = document.querySelector(".value3");
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  
+
   axios
     .post("https://social-backend-kzy5.onrender.com/auth/reset-pass", {
-      name: input1.value,
-      password: input2.value,
-      new: input3.value,
+      username: input1.value,
+      code: input2.value,
+      new_pass: input3.value,
     })
     .then((respons) => {
+     if (respons.status===200) {
       console.log(respons.data);
+      location.href = "./logo.html";
+     }
     })
     .catch((error) => {
       console.error("POST xatosi:", error);
     });
-
-  axios
-    .get("https://social-backend-kzy5.onrender.com/auth/reset-pass")
-    .then((res) => {
-        location.href='./logo.html'
-      console.log(res.data);
-    })
-    .catch((err) => {
-      console.error(err);
-    });
 });
-

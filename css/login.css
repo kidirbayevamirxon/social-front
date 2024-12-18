@@ -79,3 +79,8 @@
   text-decoration: none;
   color: #fff;
 }
+#uspasError{
+  color: rgba(255, 0, 0, 0.863);
+  line-height: 1px;
+  letter-spacing: 2px;
+}
