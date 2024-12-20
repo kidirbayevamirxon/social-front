@@ -102,7 +102,7 @@ more.addEventListener("submit", (event) => {
     reader.readAsDataURL(file);
 
     axios
-      .post("https://social-backend-kzy5.onrender.com/upload", formData)
+      .post("https://social-backend-kzy5.onrender.com/posts/upload", formData)
       .then((response) => {
         console.log("Rasm muvaffaqiyatli yuborildi:", response.data);
       })
@@ -111,32 +111,6 @@ more.addEventListener("submit", (event) => {
       });
   }
 });
-
-// https://social-backend-kzy5.onrender.com/docs
-// https://social-backend-kzy5.onrender.com
-const token = localStorage.getItem("authToken"); // Tokenni olish
-
-if (token) {
-  axios
-    .get("https://social-backend-kzy5.onrender.com/auth/me", {
-      headers: {
-        "Authorization": `Bearer ${token}`, // Tokenni headerga qo'shish
-      }
-    })
-    .then((res) => {
-      h1.textContent = `${res.data.username}`;
-      p1.textContent = `${res.data.email}`;
-      p2.textContent = `${res.data.first_name}`;
-      p3.textContent = `${res.data.last_name}`;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-} else {
-  console.log("Token mavjud emas!");
-}
-
-
 
 let followersCount = 0;
 
@@ -151,3 +125,8 @@ btn1.addEventListener("click", () => {
 
   span1.textContent = `Followers ${followersCount}`;
 });
+
+axios.get("https://social-backend-kzy5.onrender.com/auto/me").then((res)=>{
+  console.log(res.data);
+  
+})

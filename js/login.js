@@ -35,19 +35,4 @@ form.addEventListener("submit", (e) => {
       console.error("GET xatosi:", err);
     });
 });
-// Login qilishda tokenni olish
-axios.post("https://social-backend-kzy5.onrender.com/auth/login", {
-  username: "your_username",
-  password: "your_password"
-})
-.then(response => {
-  // Tokenni olish
-  const token = response.data.token; 
-
-  // Tokenni localStorage'ga saqlash
-  localStorage.setItem("authToken", token);
-})
-.catch(error => {
-  console.error("Login xatosi:", error);
-});
 
