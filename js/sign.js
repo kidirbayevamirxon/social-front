@@ -15,34 +15,50 @@ passwordE.appendChild(emailError);
 passwordError.className = "passwordError";
 emailError.className = "emailError";
 
+// Emailni tekshirish uchun oddiy regulyar ifoda
+function isValidEmail(email) {
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  return emailPattern.test(email);
+}
+
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
   const password = input4.value;
+  const email = input5.value;
 
-
+  // Parol uzunligini tekshirish
   if (password.length < 6) {
     passwordError.textContent = "Password must be at least 6 characters long";
-    return; 
+    return;
   } else {
     passwordError.textContent = "";
   }
 
+  // Email formatini tekshirish
+  if (!isValidEmail(email)) {
+    emailError.textContent = "Please enter a valid email address";
+    return;
+  } else {
+    emailError.textContent = "";
+  }
 
+  // Ma'lumotlarni serverga yuborish
   axios.post("https://social-backend-kzy5.onrender.com/auth/sign-up", {
     first_name: input1.value,
     last_name: input2.value,
-    email: input5.value,
+    email: email,
     password: password,
     username: input3.value
   })
   .then((response) => {
     console.log("POST javobi:", response.data);
-    location.href = './logo.html';
+    location.href = './logo.html';  // Muvaffaqiyatli ro'yxatdan o'tganidan so'ng boshqa sahifaga o'tish
   })
   .catch((error) => {
     if (error.response) {
       const errorData = error.response.data;
+      // Xatolarni serverdan olib, foydalanuvchiga ko'rsatish
       if (errorData.message === 'Incorrect password') {
         passwordError.textContent = "Incorrect password";
       } else if (errorData.message === 'Account already created') {

@@ -18,6 +18,7 @@ btndiv.appendChild(btndivbtn);
 
 const img = document.createElement("img");
 btndivtop.appendChild(img);
+img.src = "user-solid (4).svg";
 img.width = 70;
 img.height = 70;
 
@@ -67,28 +68,73 @@ span1.textContent = `Followers ${0}`;
 span2.textContent = `Following ${0}`;
 btn1.textContent = "Follow";
 
+fileInput.addEventListener("change", (event) => {
+  const file = event.target.files[0];
 
+  if (file) {
+    const reader = new FileReader();
 
-axios
-  .get("https://social-backend-kzy5.onrender.com/auth/me")
-  .then((res) => {
-    console.log(res.data);
+    reader.onload = function (e) {
+      displayImg.src = e.target.result;
+      displayImg.style.display = "block";
+    };
 
-    // Foydalanuvchi ma'lumotlarini DOMga joylashtirish
-    const h1 = document.querySelector(".h1");
-    const p1 = document.querySelector(".p1");
-    const p2 = document.querySelector(".p2");
-    const p3 = document.querySelector(".p3");
+    reader.readAsDataURL(file);
+  }
+});
 
-    if (h1) h1.textContent = `${res.data.username}`;
-    if (p1) p1.textContent = `${res.data.email}`;
-    if (p2) p2.textContent = `${res.data.first_name}`;
-    if (p3) p3.textContent = `${res.data.last_name}`;
-  })
-  .catch((error) => {
-    console.error("API'dan foydalanuvchi ma'lumotlarini olishda xato:", error);
-  });
+more.addEventListener("submit", (event) => {
+  event.preventDefault();
 
+  const file = fileInput.files[0];
+
+  if (file) {
+    const formData = new FormData();
+    formData.append("image", file);
+
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      img.src = e.target.result;
+      img.style.display = "block";
+    };
+
+    reader.readAsDataURL(file);
+
+    axios
+      .post("https://social-backend-kzy5.onrender.com/upload", formData)
+      .then((response) => {
+        console.log("Rasm muvaffaqiyatli yuborildi:", response.data);
+      })
+      .catch((error) => {
+        console.error("Rasmni yuborishda xato:", error);
+      });
+  }
+});
+
+// https://social-backend-kzy5.onrender.com/docs
+// https://social-backend-kzy5.onrender.com
+const token = localStorage.getItem("authToken"); // Tokenni olish
+
+if (token) {
+  axios
+    .get("https://social-backend-kzy5.onrender.com/auth/me", {
+      headers: {
+        "Authorization": `Bearer ${token}`, // Tokenni headerga qo'shish
+      }
+    })
+    .then((res) => {
+      h1.textContent = `${res.data.username}`;
+      p1.textContent = `${res.data.email}`;
+      p2.textContent = `${res.data.first_name}`;
+      p3.textContent = `${res.data.last_name}`;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+} else {
+  console.log("Token mavjud emas!");
+}
 
 
 
