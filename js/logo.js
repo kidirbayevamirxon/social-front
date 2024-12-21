@@ -21,8 +21,10 @@ form.addEventListener("submit", (e) => {
 
   const commit = document.createElement("div");
   const commitp = document.createElement("p");
+  const commitImg=document.createElement('img')
   ldiv.appendChild(commit);
   commit.appendChild(commitp);
+  commit.appendChild(commitImg)
 
   const likecommit = document.createElement("div");
   const span1 = document.createElement("button");
@@ -31,9 +33,9 @@ form.addEventListener("submit", (e) => {
   likecommit.appendChild(span1);
   likecommit.appendChild(span2);
 
-  span1.type = "button";  // type="button" bo'lishi kerak
-  span2.type = "button";  // type="button" bo'lishi kerak
-  p2.type = "button";  // type="button" bo'lishi kerak
+  span1.type = "button"; 
+  span2.type = "button"; 
+  p2.type = "button"; 
   ldiv.className = "ldiv";
   topdiv.className = "topdiv";
   img.className = "lrimg";
@@ -44,6 +46,9 @@ form.addEventListener("submit", (e) => {
   span1.className = "span1";
   span2.className = "span2";
   likecommit.className = "likecommit";
+  commitImg.className="commitImg"
+
+  // ------------------------------------------------------------------------------
 
   p2.textContent = "Follow";
   commitp.textContent = "aaaaaaaaa";

@@ -1,27 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/post.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/post.css" />
     <title>New Post</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div class="post">
-            <div class="post-div">
-                <div class="post-top"><a href="./logo.html"><img class="post-left" src="/arrow-left-solid.svg" alt=""></a></div>
-                <form action="" class="formms" enctype="multipart/form-data" method="post">
-                    <input type="text" class="value" placeholder="What is happening!?" required>
-                    <h1 class="post-h1">Choose Image</h1>
-                    <label for="value1" class="post-label">Select Image</label>
-                    <input id="value1" type="file" class="value2" accept="image/*" style="display: none;" required>
-                    <img id="displayimg" alt="Preview" style="max-width: 200px; max-height: 200px; display: none; margin-top: 10px;">
-                    <input class="post-btn" type="submit" value="Submit">
-                </form>
-            </div>
+      <div class="post">
+        <div class="post-div">
+          <div class="post-top">
+            <a href="./logo.html"
+              ><img class="post-left" src="/arrow-left-solid.svg" alt=""
+            /></a>
+          </div>
+          <form
+            action=""
+            class="formms"
+            enctype="multipart/form-data"
+            method="post"
+          >
+            <input
+              type="text"
+              class="value"
+              placeholder="What is happening!?"
+              required
+            />
+            <h1 class="post-h1">Choose Image</h1>
+            <label for="value1" class="post-label">Select Image</label>
+            <input
+              id="value1"
+              type="file"
+              class="value2"
+              accept="image/*"
+              style="display: none"
+              required
+            />
+            <img
+              id="displayimg"
+              alt="Preview"
+              style="
+                max-width: 200px;
+                max-height: 200px;
+                display: none;
+                margin-top: 10px;
+              "
+            />
+            <input class="post-btn" type="submit" value="Submit" />
+          </form>
         </div>
+      </div>
     </div>
+
     <script type="module" src="./js/post.js"></script>
-</body>
+  </body>
 </html>

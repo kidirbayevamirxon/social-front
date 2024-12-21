@@ -49,6 +49,8 @@ btndivbtn.appendChild(span1);
 const span2 = document.createElement("span");
 btndivbtn.appendChild(span2);
 
+// -------------------------------------------------------------------------------------------------------------------------
+
 btndiv.className = "btndiv";
 btndivtop.className = "btndivtop";
 btndivbtn.className = "btndivbtn";
@@ -68,6 +70,8 @@ span1.textContent = `Followers ${0}`;
 span2.textContent = `Following ${0}`;
 btn1.textContent = "Follow";
 
+// -------------------------------------------------------------------------------------------------------------------------
+
 fileInput.addEventListener("change", (event) => {
   const file = event.target.files[0];
 
@@ -76,12 +80,14 @@ fileInput.addEventListener("change", (event) => {
 
     reader.onload = function (e) {
       displayImg.src = e.target.result;
-      displayImg.style.display = "block";
+      displayImg.style.display = "block"; // Faylni yuklab bo'lgach rasmni ko'rsatish
     };
 
     reader.readAsDataURL(file);
   }
 });
+
+// -------------------------------------------------------------------------------------------------------------------------
 
 more.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -95,8 +101,8 @@ more.addEventListener("submit", (event) => {
     const reader = new FileReader();
 
     reader.onload = function (e) {
-      img.src = e.target.result;
-      img.style.display = "block";
+      img.src = e.target.result; // Rasmni ko'rsatish
+      img.style.display = "block"; // Rasmni ko'rsatish
     };
 
     reader.readAsDataURL(file);
@@ -104,13 +110,15 @@ more.addEventListener("submit", (event) => {
     axios
       .post("https://social-backend-kzy5.onrender.com/posts/upload", formData)
       .then((response) => {
-        console.log("Rasm muvaffaqiyatli yuborildi:", response.data);
+        console.log(response.data);
       })
       .catch((error) => {
-        console.error("Rasmni yuborishda xato:", error);
+        console.error("Rasm yuklashda xatolik:", error);
       });
   }
 });
+
+// ---------------------------------------------------------------------------------------------------------------------
 
 let followersCount = 0;
 
@@ -126,7 +134,25 @@ btn1.addEventListener("click", () => {
   span1.textContent = `Followers ${followersCount}`;
 });
 
-axios.get("https://social-backend-kzy5.onrender.com/auto/me").then((res)=>{
-  console.log(res.data);
-  
-})
+// -----------------------------------------------------------------------------------------------------------------------
+
+const token = localStorage.getItem("authToken");
+
+if (token) {
+  axios
+    .get("https://social-backend-kzy5.onrender.com/protected-data", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
+      console.log("Ma'lumotlar:", response.data);
+      const username = localStorage.getItem("username");
+      console.log(username);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+} else {
+  console.log("Foydalanuvchi tizimga kirgan emas.");
+}

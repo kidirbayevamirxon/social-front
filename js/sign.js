@@ -15,7 +15,7 @@ passwordE.appendChild(emailError);
 passwordError.className = "passwordError";
 emailError.className = "emailError";
 
-// Emailni tekshirish uchun oddiy regulyar ifoda
+
 function isValidEmail(email) {
   const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
   return emailPattern.test(email);
@@ -27,7 +27,7 @@ form.addEventListener("submit", (e) => {
   const password = input4.value;
   const email = input5.value;
 
-  // Parol uzunligini tekshirish
+
   if (password.length < 6) {
     passwordError.textContent = "Password must be at least 6 characters long";
     return;
@@ -35,7 +35,6 @@ form.addEventListener("submit", (e) => {
     passwordError.textContent = "";
   }
 
-  // Email formatini tekshirish
   if (!isValidEmail(email)) {
     emailError.textContent = "Please enter a valid email address";
     return;
@@ -43,28 +42,41 @@ form.addEventListener("submit", (e) => {
     emailError.textContent = "";
   }
 
-  // Ma'lumotlarni serverga yuborish
-  axios.post("https://social-backend-kzy5.onrender.com/auth/sign-up", {
-    first_name: input1.value,
-    last_name: input2.value,
-    email: email,
-    password: password,
-    username: input3.value
-  })
-  .then((response) => {
-    console.log("POST javobi:", response.data);
-    location.href = './logo.html';  // Muvaffaqiyatli ro'yxatdan o'tganidan so'ng boshqa sahifaga o'tish
-  })
-  .catch((error) => {
-    if (error.response) {
-      const errorData = error.response.data;
-      // Xatolarni serverdan olib, foydalanuvchiga ko'rsatish
-      if (errorData.message === 'Incorrect password') {
-        passwordError.textContent = "Incorrect password";
-      } else if (errorData.message === 'Account already created') {
-        emailError.textContent = "This account already exists";
+  axios
+    .post("https://social-backend-kzy5.onrender.com/auth/sign-up", {
+      first_name: input1.value,
+      last_name: input2.value,
+      email: input5.value,
+      password: input4.value,  
+      username: input3.value,
+    })
+    .then((response) => {
+      console.log(response.data);
+
+      if (response.data.token) {
+        localStorage.setItem("authToken", response.data.token);
       }
-      console.error("POST xatosi:", errorData);
-    }
-  });
+
+      localStorage.setItem("username", input3.value);
+      localStorage.setItem("email", input5.value);
+      localStorage.setItem("first_name", input1.value);
+      localStorage.setItem("last_name", input2.value);
+
+      location.href = "./logo.html";
+    })
+    .catch((error) => {
+      if (error.response) {
+        const errorData = error.response.data;
+
+        if (errorData.message === "Incorrect password") {
+          passwordError.textContent = "Incorrect password";
+        } else if (errorData.message === "Account already created") {
+          emailError.textContent = "This account already exists";
+        } else {
+          emailError.textContent = errorData.message || "An error occurred. Please try again.";
+        }
+      } else {
+        emailError.textContent = "Network error or server is not responding. Please try again later.";
+      }
+    });
 });
