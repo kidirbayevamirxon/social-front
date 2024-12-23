@@ -113,7 +113,7 @@ more.addEventListener("submit", (event) => {
         console.log(response.data);
       })
       .catch((error) => {
-        console.error("Rasm yuklashda xatolik:", error);
+        console.error(error);
       });
   }
 });
@@ -146,7 +146,7 @@ if (token) {
       },
     })
     .then((response) => {
-      console.log("Ma'lumotlar:", response.data);
+      console.log(response.data);
       const username = localStorage.getItem("username");
       console.log(username);
     })
@@ -156,6 +156,6 @@ if (token) {
 } else {
   console.log("Foydalanuvchi tizimga kirgan emas.");
 }
-axiosInstance.get("https://social-backend-kzy5.onrender.com/auth/me").then((res)=>{
-  h1.textContent=res.data.username
-})
+// axiosInstance.get("/auth/me").then((res)=>{
+//   h1.textContent=res.data.username
+// })

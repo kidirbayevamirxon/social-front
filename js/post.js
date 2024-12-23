@@ -44,6 +44,7 @@ axiosInstance
     console.log(response.data);
   })
   .catch((error) => {
-    console.error(error.response);
+    console.error(error.response ? error.response.data : error.message);
   });
+
 

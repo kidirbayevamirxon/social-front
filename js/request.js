@@ -65,9 +65,3 @@ axiosInstance.interceptors.response.use(
     }
 );
 
-function logoutUser() {
-    console.log('Foydalanuvchi tizimdan chiqmoqda...');
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    window.location.replace('login.html'); // Login sahifasiga yo'naltirish
-}
