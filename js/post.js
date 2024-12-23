@@ -1,10 +1,12 @@
-import axios from "axios";
+import { axiosInstance } from "./request";
 
+const input = document.getElementById("value");
 const fileInput = document.getElementById("value1");
 const displayImg = document.getElementById("displayimg");
 const form = document.querySelector(".formms");
 
-fileInput.addEventListener("change", function () {
+fileInput.addEventListener("change", function (i) {
+  i.preventDefault()
   const file = this.files[0];
   if (file) {
     const reader = new FileReader();
@@ -24,29 +26,24 @@ form.addEventListener("submit", function (e) {
 
   const file = fileInput.files[0];
 
-  if (file) {
     const formData = new FormData();
     formData.append("image", file);
 
-    const token = localStorage.getItem("authToken");
+    const token = localStorage.getItem("accessToken");
 
     if (!token) {
       console.log("Iltimos, tizimga kirganingizni tekshiring.");
       return;
     }
-
-    axios
-      .post("https://social-backend-kzy5.onrender.com/posts/upload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error(error.response ? error.response.data : error);
-      });
-  }
 });
+axiosInstance
+  .post("https://social-backend-kzy5.onrender.com/posts/upload", {
+    text: input.value,
+  })
+  .then((response) => {
+    console.log(response.data);
+  })
+  .catch((error) => {
+    console.error(error.response);
+  });
+

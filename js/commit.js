@@ -1,4 +1,4 @@
-import "../css/comment.css";
+// import "/css/comment.css";
 
 const commitccc = document.querySelector(".commitccc");
 const compro = document.createElement("div");

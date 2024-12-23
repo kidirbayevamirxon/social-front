@@ -1,4 +1,4 @@
-import axios from "axios";
+import { axiosInstance } from "./request";
 import "../css/profile.css";
 
 const more = document.querySelector(".form");
@@ -80,7 +80,7 @@ fileInput.addEventListener("change", (event) => {
 
     reader.onload = function (e) {
       displayImg.src = e.target.result;
-      displayImg.style.display = "block"; // Faylni yuklab bo'lgach rasmni ko'rsatish
+      displayImg.style.display = "block"; 
     };
 
     reader.readAsDataURL(file);
@@ -101,13 +101,13 @@ more.addEventListener("submit", (event) => {
     const reader = new FileReader();
 
     reader.onload = function (e) {
-      img.src = e.target.result; // Rasmni ko'rsatish
-      img.style.display = "block"; // Rasmni ko'rsatish
+      img.src = e.target.result; 
+      img.style.display = "block";
     };
 
     reader.readAsDataURL(file);
 
-    axios
+    axiosInstance
       .post("https://social-backend-kzy5.onrender.com/posts/upload", formData)
       .then((response) => {
         console.log(response.data);
@@ -136,10 +136,10 @@ btn1.addEventListener("click", () => {
 
 // -----------------------------------------------------------------------------------------------------------------------
 
-const token = localStorage.getItem("authToken");
+const token = localStorage.getItem("accessToken");
 
 if (token) {
-  axios
+  axiosInstance
     .get("https://social-backend-kzy5.onrender.com/protected-data", {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -156,3 +156,6 @@ if (token) {
 } else {
   console.log("Foydalanuvchi tizimga kirgan emas.");
 }
+axiosInstance.get("https://social-backend-kzy5.onrender.com/auth/me").then((res)=>{
+  h1.textContent=res.data.username
+})

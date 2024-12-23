@@ -1,3 +1,4 @@
+import { axiosInstance } from "./request";
 import "../css/logo.css";
 
 const logodiv = document.querySelector(".logodiv");
@@ -98,5 +99,7 @@ form.addEventListener("submit", (e) => {
   
   span2.textContent=`🗨 ${com}`
 });
-
+// axios.get("https://social-backend-kzy5.onrender.com/docs#/POSTS/posts_posts_gett").then((respons)=>{
+//   console.log(respons.data);
+// })
 

@@ -54,7 +54,7 @@ form.addEventListener("submit", (e) => {
       console.log(response.data);
 
       if (response.data.token) {
-        localStorage.setItem("authToken", response.data.token);
+        localStorage.setItem("accessToken", response.data.token);
       }
 
       localStorage.setItem("username", input3.value);

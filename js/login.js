@@ -1,4 +1,4 @@
-import axios from "axios";
+import { axiosInstance } from "./request";
 
 
 const form = document.querySelector(".form");
@@ -11,7 +11,7 @@ uspas.style.display = "none";
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  axios
+  axiosInstance
     .post("https://social-backend-kzy5.onrender.com/auth/login", {
       username: input1.value,
       password: input2.value,
@@ -19,7 +19,7 @@ form.addEventListener("submit", (e) => {
     .then((response) => {
       console.log(response.data);
       if (response.data.token) {
-        localStorage.setItem("authToken", response.data.token);
+        localStorage.setItem("accessToken", response.data.token);
         localStorage.setItem("username", input1.value);
       }
       
