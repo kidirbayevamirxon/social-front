@@ -103,3 +103,6 @@ form.addEventListener("submit", (e) => {
 //   console.log(respons.data);
 // })
 
+axiosInstance.get("/auth/me").then((res)=>{
+  console.log(res.data);
+})
