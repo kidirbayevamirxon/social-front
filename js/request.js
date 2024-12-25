@@ -63,7 +63,7 @@ axiosInstance.interceptors.response.use(
         console.error("Token yangilashda xatolik:", refreshError);
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
-        window.location.href = "/login"; // Foydalanuvchini login sahifasiga yuborish
+        window.location.href = "/login"; 
         return Promise.reject(refreshError);
       }
     }
