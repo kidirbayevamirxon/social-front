@@ -6,7 +6,7 @@ const displayImg = document.getElementById("displayimg");
 const form = document.querySelector(".formms");
 
 fileInput.addEventListener("change", function (i) {
-  i.preventDefault()
+  i.preventDefault();
   const file = this.files[0];
   if (file) {
     const reader = new FileReader();
@@ -22,29 +22,43 @@ fileInput.addEventListener("change", function (i) {
 });
 
 form.addEventListener("submit", function (e) {
-  e.preventDefault();
+  e.preventDefault(); 
 
-  const file = fileInput.files[0];
+  const file = fileInput.files[0]; 
+  if (!file) {
+    console.log("Faylni tanlang.");
+    return; 
+  }
 
-    const formData = new FormData();
-    formData.append("image", file);
+  const formData = new FormData();
+  formData.append("image", file); 
+  formData.append("text", input.value);
+  formData.append("image_id", 123);
 
-    const token = localStorage.getItem("accessToken");
+  
+  const token = localStorage.getItem("accessToken");
+  if (!token) {
+    console.log("Iltimos, tizimga kirganingizni tekshiring.");
+    return;
+  }
 
-    if (!token) {
-      console.log("Iltimos, tizimga kirganingizni tekshiring.");
-      return;
-    }
+  
+  axiosInstance
+    .post("/posts/upload", formData, {
+      headers: {
+        "Authorization": `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((error) => {
+      if (error.response) {
+        console.log("Xatolik:", error.response.data); 
+        console.log("Status:", error.response.status);
+        console.log("Detail:", error.response.data.detail);
+      } else {
+        console.log("Tarmoq xatosi yoki server javob bermadi.");
+      }
+    });
 });
-axiosInstance
-  .post("https://social-backend-kzy5.onrender.com/posts/upload", {
-    text: input.value,
-  })
-  .then((response) => {
-    console.log(response.data);
-  })
-  .catch((error) => {
-    console.error(error.response ? error.response.data : error.message);
-  });
-
-

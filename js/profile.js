@@ -96,27 +96,41 @@ more.addEventListener("submit", (event) => {
 
   if (file) {
     const formData = new FormData();
-    formData.append("image", file);
+    formData.append("image", file); 
+    formData.append("text", "Image description or any text");  
+    formData.append("image_id", "your-image-id");
 
+    
     const reader = new FileReader();
-
     reader.onload = function (e) {
-      img.src = e.target.result; 
+      img.src = e.target.result;
       img.style.display = "block";
     };
-
     reader.readAsDataURL(file);
 
+    
     axiosInstance
       .post("https://social-backend-kzy5.onrender.com/posts/upload", formData)
       .then((response) => {
-        console.log(response.data);
+    
+        const imageUrl = response.data.imageUrl;
+        console.log("Rasm URL:", imageUrl);
+        localStorage.setItem("profileImage", imageUrl);
+        img.src = imageUrl;
+        img.style.display = "block";
       })
       .catch((error) => {
-        console.error(error);
+        if (error.response) {
+          console.log("Xatolik:", error.response.data); 
+          console.log("Status:", error.response.status);
+          console.log("Detail:", error.response.data.detail); 
+        } else {
+          console.log("Tarmoq xatosi yoki server javob bermadi.");
+        }
       });
   }
 });
+
 
 // ---------------------------------------------------------------------------------------------------------------------
 
@@ -136,26 +150,17 @@ btn1.addEventListener("click", () => {
 
 // -----------------------------------------------------------------------------------------------------------------------
 
-const token = localStorage.getItem("accessToken");
+axiosInstance.get("/auth/me").then((res) => {
+  h1.textContent = res.data.username;
+  p1.textContent = res.data.email;
+  p2.textContent = res.data.first_name;
+  p3.textContent = res.data.last_name;
 
-if (token) {
-  axiosInstance
-    .get("https://social-backend-kzy5.onrender.com/protected-data", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-    .then((response) => {
-      console.log(response.data);
-      const username = localStorage.getItem("username");
-      console.log(username);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-} else {
-  console.log("Foydalanuvchi tizimga kirgan emas.");
-}
-// axiosInstance.get("/auth/me").then((res)=>{
-//   h1.textContent=res.data.username
-// })
+ 
+  const profileImage = localStorage.getItem("profileImage");
+  if (profileImage) {
+    img.src = profileImage;
+  }
+}).catch((error) => {
+  console.log("Error");
+});

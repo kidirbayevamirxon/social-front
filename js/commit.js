@@ -125,7 +125,6 @@ submit.addEventListener("click", () => {
     let vaqt = new Date();
     let vaqtt = `${vaqt.getDate()}/${vaqt.getMonth()}/${vaqt.getFullYear()}, ${vaqt.getHours()}:${vaqt.getMinutes()}:${vaqt.getSeconds()}`;
 
-
     const newComment = document.createElement("div");
     newComment.className = "newComment";
     newComment.innerHTML = `
@@ -146,25 +145,24 @@ submit.addEventListener("click", () => {
       </div>
     `;
     commitccc.appendChild(newComment);
-    
 
-    // Hodisa yuborish
+    
     const event = new CustomEvent("incrementCom", {
       detail: { comment: commentText },
     });
     window.dispatchEvent(event);
 
-    input.value = ""; // Inputni tozalash
+    input.value = ""; 
   } else {
     alert("Iltimos, sharh matnini kiriting.");
   }
 
-  // `com` qiymatini oshirish
+  
   com += 1;
   span2.textContent = `🗨 ${com}`;
 });
 
-// Har bir sharhni o'chirish uchun
+
 commitccc.addEventListener("click", (e) => {
   if (e.target && e.target.classList.contains("ahlat")) {
     const commentDiv = e.target.closest(".committext");

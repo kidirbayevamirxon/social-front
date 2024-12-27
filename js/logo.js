@@ -94,14 +94,12 @@ form.addEventListener("submit", (e) => {
   });
   window.addEventListener("incrementCom", (event) => {
     window.com += 1;
-    console.log(`Sharhlar soni (logo.js): ${window.com}`);
+    console.log(window.com);
   });
   
   span2.textContent=`🗨 ${com}`
 });
-// axios.get("https://social-backend-kzy5.onrender.com/docs#/POSTS/posts_posts_gett").then((respons)=>{
-//   console.log(respons.data);
-// })
+
 
 axiosInstance.get("/auth/me").then((res)=>{
   console.log(res.data);
