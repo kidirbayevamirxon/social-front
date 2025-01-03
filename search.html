@@ -1,18 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/search.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/search.css" />
     <title>Search</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div class="search">
-            <div class="search-div"><a href="./logo.html"><div class="search-img-div"><img src="/arrow-left-solid.svg" alt="" class="search-img"></div></a>
-            <form action="" class="form-search"><input type="search" class="value1" placeholder="Search"><button type="submit" class="search-btn">Search</button></form>
-            </div>
+      <div class="search">
+        <div class="search-div">
+          <a href="./logo.html"
+            ><div class="search-img-div">
+              <img src="/arrow-left-solid.svg" alt="" class="search-img" /></div
+          ></a>
+          <form action="" class="formSearch">
+            <input type="search" class="value1" placeholder="Search" /><button
+              type="submit"
+              class="search-btn"
+            >
+              Search
+            </button>
+          </form>
         </div>
+        <div id="results-container" class="search-result"></div>
+      </div>
     </div>
-</body>
+    <script src="./js/serch.js"></script>
+  </body>
 </html>
