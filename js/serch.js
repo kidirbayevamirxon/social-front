@@ -27,6 +27,36 @@ form.addEventListener("submit", (e) => {
           userName.textContent = result.username;
           userName.className = "userName";
           userElement.appendChild(userName);
+          
+          const followed=document.createElement("a")
+          userElement.appendChild(followed)
+          followed.className="followed"
+          followed.textContent="Follow"
+          followed.href="#"
+          followed.innerText=result.has_followed? "Unfollow":"Follow";
+          
+          followed.addEventListener("click" , (e)=>{
+            e.preventDefault()
+            if (followed.innerText="Follow"){
+              axiosInstance.post('/followings/follow',{username:result.username}).then((respons)=>{
+                if (respons.status===200) {
+                  followed.innerText="Unfollow"
+                  followed.classList.add="Follow"
+                }
+              }).catch((error)=>{
+                console.log("followda xato :",error);
+              })
+            }else if(followed.innerText="Unfollow"){
+              axiosInstance.post('/followings/unfollow', {username:result.username}).then((res)=>{
+                if(res.status===200){
+                  followed.innerText="Follow"
+                  followed.classList.add="Unfollow"
+                }
+              }).catch((err)=>{
+                console.log(err);
+              })
+            }
+          })
 
           resultsContainer.appendChild(userElement);
         });
