@@ -39,9 +39,18 @@ form.addEventListener("submit", function (e) {
     .then((response) => {
       const imageId = response.data.image_id;
       console.log("Rasm ID: ", imageId);
-
+      const text = input.value;
       localStorage.setItem("imageId", imageId.toString());
-      location.href = "./logo.html";
+      // location.href = "./logo.html";
+      axiosInstance
+        .post("/posts/upload", {
+          text: text,
+          image_id: imageId,
+        })
+        .then((res) => {
+          console.log(res);
+          location.href = "./logo.html";
+        });
     })
     .catch((error) => {
       console.log(error);
