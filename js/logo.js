@@ -37,9 +37,11 @@ function createPostElement() {
       const likecommit = document.createElement("div");
       const span1 = document.createElement("button");
       const span2 = document.createElement("button");
+      const spanP1=document.createElement('p')
       ldiv.appendChild(likecommit);
       likecommit.appendChild(span1);
       likecommit.appendChild(span2);
+      span1.appendChild(spanP1)
 
       span1.type = "button";
       span2.type = "button";
@@ -55,28 +57,23 @@ function createPostElement() {
       likecommit.className = "likecommit";
       commitImg.className = "commitImg";
 
-      commitp.textContent = "aaaaaaaaa";
-      span1.textContent = `❤ 0`;
+      
+      commitp.textContent = post.text || "No description available";
+      p1.textContent = post.username;
+      span1.textContent = `❤`;
       span2.textContent = `🗨 0`;
-
-      const username = localStorage.getItem("username");
-      if (username) {
-        p1.textContent = `${username}`;
-      } else {
-        console.error("Foydalanuvchi aniqlanmadi yoki element topilmadi.");
-      }
-
+      spanP1.textContent=post.likes
+      
       followed.addEventListener("click", (e) => {
         e.preventDefault();
+
         if (followed.innerText === "Follow") {
           axiosInstance
             .post("/followings/follow", { username: post.username })
             .then((respons) => {
-              if (respons.status === 200) {
-                followed.innerText = "Unfollow";
-                followed.classList.add("Unfollow");
-                followed.classList.remove("Follow");
-              }
+              followed.innerText = "Unfollow";
+              followed.classList.add("Unfollow");
+              followed.classList.remove("Follow");
             })
             .catch((error) => {
               console.log("followda xato :", error);
@@ -85,11 +82,9 @@ function createPostElement() {
           axiosInstance
             .post("/followings/unfollow", { username: post.username })
             .then((res) => {
-              if (res.status === 200) {
-                followed.innerText = "Follow";
-                followed.classList.add("Follow");
-                followed.classList.remove("Unfollow");
-              }
+              followed.innerText = "Follow";
+              followed.classList.add("Follow");
+              followed.classList.remove("Unfollow");
             })
             .catch((err) => {
               console.log(err);
@@ -97,31 +92,44 @@ function createPostElement() {
         }
       });
 
-      let liked = 0;
+     
       span1.addEventListener("click", () => {
-        liked = liked === 0 ? 1 : 0;
-        span1.style.color = liked ? "red" : "#fff";
-        span1.textContent = `❤ ${liked}`;
+  
+        span1.style.color ="red";
+        span1.textContent = `❤ ${likes}`;
+
+        
+        axiosInstance
+          .post("/posts/like")
+          .then((response) => {
+             if (response.data.success) {
+            span1.innerText = `❤ ${response.data.likes}`;
+             }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       });
+      
+
+      
       span2.addEventListener("click", () => {
         location.href = "./commit.html";
       });
 
-      const imageId = localStorage.getItem("imageId");
-      axiosInstance
-        .get(`/image/${imageId}`)
-        .then((res) => {
-          console.log(res.data);
-          const imageUrl = res.data.image_id;
-          commitImg.src = imageUrl;
-          commitImg.alt = "";
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-      axiosInstance.get("/posts").then((res) => {
-        console.log(res.data);
-      });
+      
+      const imageId = post.image_id || localStorage.getItem("imageId");
+      if (imageId) {
+        axiosInstance
+          .get(`/image/${imageId}`)
+          .then((res) => {
+            const imageUrl = post.image;
+            commitImg.src = imageUrl;
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
     });
   });
 
@@ -133,7 +141,6 @@ window.addEventListener("incrementCom", (event) => {
   com += 1;
   console.log(com);
 });
-
 const { commitImg, span2 } = createPostElement();
 span2.textContent = `🗨 ${com}`;
 

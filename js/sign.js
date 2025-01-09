@@ -51,15 +51,10 @@ form.addEventListener("submit", (e) => {
     .then((response) => {
       console.log(response.data); 
     
-      
       if (response.data.access_token && response.data.refresh_token) {
         localStorage.setItem("accessToken", response.data.access_token);
         localStorage.setItem("refreshToken", response.data.refresh_token);   
-        localStorage.setItem("username", input3.value);
-        localStorage.setItem("email", input5.value);
-        localStorage.setItem("first_name", input1.value);
-        localStorage.setItem("last_name", input2.value);
-    
+
         location.href = "./logo.html";
       } else {
         console.error("Tokenlar mavjud emas:", response.data);
