@@ -146,22 +146,19 @@ submit.addEventListener("click", () => {
     `;
     commitccc.appendChild(newComment);
 
-    
     const event = new CustomEvent("incrementCom", {
       detail: { comment: commentText },
     });
     window.dispatchEvent(event);
 
-    input.value = ""; 
+    input.value = "";
   } else {
     alert("Iltimos, sharh matnini kiriting.");
   }
 
-  
   com += 1;
   span2.textContent = `🗨 ${com}`;
 });
-
 
 commitccc.addEventListener("click", (e) => {
   if (e.target && e.target.classList.contains("ahlat")) {

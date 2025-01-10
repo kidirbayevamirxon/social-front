@@ -35,16 +35,21 @@ function createPostElement() {
       commit.appendChild(commitImg);
 
       const likecommit = document.createElement("div");
-      const span1 = document.createElement("button");
-      const span2 = document.createElement("button");
-      const spanP1=document.createElement('p')
+      const span1 = document.createElement("a");
+      const span2 = document.createElement("a");
+      const spanP1 = document.createElement("p");
+      const spanP2 = document.createElement("p");
       ldiv.appendChild(likecommit);
       likecommit.appendChild(span1);
+      likecommit.appendChild(spanP1);
       likecommit.appendChild(span2);
-      span1.appendChild(spanP1)
+      likecommit.appendChild(spanP2);
 
-      span1.type = "button";
-      span2.type = "button";
+      // ------------------------------
+      span1.innerText = post.has_liked ? "❤" : "❤";
+      span1.style.color = post.has_liked ? "red" : "white";
+      // -------------------------------
+
       ldiv.className = "ldiv";
       topdiv.className = "topdiv";
       img.className = "lrimg";
@@ -56,14 +61,15 @@ function createPostElement() {
       span2.className = "span2";
       likecommit.className = "likecommit";
       commitImg.className = "commitImg";
+      spanP1.className = "spanP1";
+      spanP2.className = "spanP2";
 
-      
       commitp.textContent = post.text || "No description available";
       p1.textContent = post.username;
-      span1.textContent = `❤`;
-      span2.textContent = `🗨 0`;
-      spanP1.textContent=post.likes
-      
+      span2.innerHTML = `🗨`; 
+      spanP1.textContent = post.likes;
+      spanP2.textContent = post.comments;
+
       followed.addEventListener("click", (e) => {
         e.preventDefault();
 
@@ -86,38 +92,53 @@ function createPostElement() {
               followed.classList.add("Follow");
               followed.classList.remove("Unfollow");
             })
-            .catch((err) => {
-              console.log(err);
+            .catch((error) => {
+              console.log("unfollowda xato :", error);
             });
         }
       });
 
-     
       span1.addEventListener("click", () => {
-  
-        span1.style.color ="red";
-        span1.textContent = `❤ ${likes}`;
+        if (post.has_liked) {
+          post.has_liked = false;
+          span1.style.color = "white";
+        } else {
+          post.has_liked = true;
+          span1.style.color = "red";
+        }
 
-        
+        console.log("Yuborilayotgan ma'lumotlar:", {
+          post_id: post.id,
+          hasLiked: post.has_liked,
+        });
+        location.reload();
         axiosInstance
-          .post("/posts/like")
+          .post(
+            "/posts/like",
+            { post_id: post.id, hasLiked: post.has_liked },
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          )
           .then((response) => {
-             if (response.data.success) {
-            span1.innerText = `❤ ${response.data.likes}`;
-             }
+            if (response.data.success) {
+              post.likes = response.data.likes;
+              span1.innerText = `❤ ${post.likes}`;
+              spanP1.innerText = `❤ ${response.data.likes}`;
+              console.log(response.data.likes);
+            }
           })
           .catch((error) => {
-            console.log(error);
+            console.log("Xato yuz berdi:", error);
           });
       });
-      
 
-      
       span2.addEventListener("click", () => {
         location.href = "./commit.html";
       });
 
-      
       const imageId = post.image_id || localStorage.getItem("imageId");
       if (imageId) {
         axiosInstance
@@ -133,16 +154,16 @@ function createPostElement() {
     });
   });
 
-  return { commitImg, span2 };
+  // return { commitImg, span2 };
 }
 
-let com = 0;
-window.addEventListener("incrementCom", (event) => {
-  com += 1;
-  console.log(com);
-});
-const { commitImg, span2 } = createPostElement();
-span2.textContent = `🗨 ${com}`;
+// let com = 0;
+// window.addEventListener("incrementCom", (event) => {
+//   com += 1;
+//   console.log(com);
+// });
+// const { commitImg, span2 } = createPostElement();
+// span2.textContent = `🗨 ${com}`;
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
